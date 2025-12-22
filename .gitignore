@@ -1,0 +1,15 @@
+# Node
+node_modules/
+
+# Env
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Uploads (optional)
+uploads/
