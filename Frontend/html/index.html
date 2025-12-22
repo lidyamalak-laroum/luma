@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Using Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Using FontAwesome for Icons (Mocking with CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Fallback for FontAwesome if offline, though CDN is standard */
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- LOGIN VIEW -->
+        <div id="view-login" class="view active">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <h2 style="margin-top: 15px; color: var(--dark-green);">Welcome Back</h2>
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="eg. user@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                        <i class="fa-solid fa-eye toggle-password" data-target="login-password"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+                <button type="button" class="btn btn-secondary" id="btn-go-to-register">Create
+                    Account</button>
+            </form>
+        </div>
+
+        <!-- REGISTER VIEW -->
+        <div id="view-register" class="view">
+            <h2 style="text-align:center; margin-bottom:20px; color: var(--dark-green);">Create Account</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-username">Username</label>
+                    <input type="text" id="reg-username" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" placeholder="eg. user@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reg-password" placeholder="Create a strong password" required>
+                        <i class="fa-solid fa-eye toggle-password" data-target="reg-password"></i>
+                    </div>
+                    <!-- Strong Password Requirements -->
+                    <div class="password-requirements" id="password-requirements">
+                        <div class="req-item" id="req-length"><i class="fa-solid fa-circle"></i> 8+ characters</div>
+                        <div class="req-item" id="req-upper"><i class="fa-solid fa-circle"></i> Uppercase letter</div>
+                        <div class="req-item" id="req-lower"><i class="fa-solid fa-circle"></i> Lowercase letter</div>
+                        <div class="req-item" id="req-number"><i class="fa-solid fa-circle"></i> Number</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="button" class="btn btn-secondary" id="btn-go-to-login">Back to
+                    Login</button>
+            </form>
+        </div>
+
+        <!-- VERIFICATION VIEW -->
+        <div id="view-verify" class="view">
+            <div class="logo-container">
+                <i class="fa-solid fa-envelope-open-text" style="font-size: 3rem; color: var(--primary-green);"></i>
+                <h3 style="margin-top: 15px;">Verify Email</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">We sent a code to your email.</p>
+            </div>
+            <form id="verify-form">
+                <div class="form-group">
+                    <label for="verify-code">Verification Code</label>
+                    <input type="text" id="verify-code" placeholder="Enter code (e.g. 1234)"
+                        style="text-align: center; letter-spacing: 5px; font-size: 1.2rem;" required>
+                    <div class="error-msg" id="verify-error">Wrong code. Please try again.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Verify</button>
+            </form>
+        </div>
+
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view">
+            <div class="home-header">
+                <div>
+                    <small style="color: var(--text-muted);">Welcome,</small>
+                    <h3 id="home-username">User</h3>
+                </div>
+                <div class="logo-icon" style="width: 40px; height: 40px; font-size: 1.2rem;"><i
+                        class="fa-solid fa-seedling"></i></div>
+            </div>
+
+            <div class="camera-card" id="camera-trigger">
+                <div class="camera-lens">
+                    <div class="camera-inner"></div>
+                </div>
+                <h3>Identify Plant</h3>
+                <p style="opacity: 0.9; font-size: 0.9rem; margin-top: 5px;">Tap to scan a leaf</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h4 style="margin-bottom: 10px; color: var(--dark-green);">Recent Advice</h4>
+                <div
+                    style="background: white; padding: 15px; border-radius: 15px; display: flex; align-items: center; box-shadow: var(--shadow-soft);">
+                    <i class="fa-solid fa-circle-info"
+                        style="color: var(--primary-green); font-size: 1.5rem; margin-right: 15px;"></i>
+                    <div>
+                        <p style="font-weight: 500;">Healthy Plants</p>
+                        <small style="color: var(--text-muted);">Ensure proper sunlight and watering.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY VIEW -->
+        <div id="view-history" class="view">
+            <h2 style="margin-bottom: 20px;">Scan History</h2>
+            <div id="history-list">
+                <!-- Items injected by JS -->
+            </div>
+        </div>
+
+        <!-- SETTINGS VIEW -->
+        <div id="view-settings" class="view">
+            <h2 style="margin-bottom: 20px;">Settings</h2>
+
+            <div class="settings-section">
+                <div class="setting-row">
+                    <div>
+                        <strong id="settings-username">My Profile</strong><br>
+                        <small style="color: var(--text-muted);" id="settings-email">user@email.com</small>
+                    </div>
+                    <i class="fa-solid fa-user" style="color: var(--primary-green); font-size: 1.2rem;"></i>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="setting-row">
+                    <strong>Dark Mode</strong>
+                    <i class="fa-solid fa-moon toggle-btn" id="theme-toggle"
+                        style="font-size: 1.5rem; color: var(--text-muted);"></i>
+                </div>
+
+            </div>
+
+            <div class="settings-section">
+                <h4 style="margin-bottom: 10px;">Help & Feedback</h4>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 0.85rem;">Bug Report</label>
+                    <input type="text" placeholder="Tell us what happened - the more details the better">
+                    <small style="display: block; margin-top: 5px; color: var(--text-muted); font-size: 0.7rem;">To help
+                        us resolve your issue, some diagnostic information will be included.</small>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem;">Feature Request</label>
+                    <input type="text" placeholder="How can we make the app even better?">
+                </div>
+            </div>
+
+            <button id="btn-logout" class="btn"
+                style="background-color: var(--light-green); color: var(--danger-red); margin-top: 20px; border: 1px solid var(--danger-red);">
+                <i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> Log Out
+            </button>
+        </div>
+
+        <!-- NAVIGATION BAR (Visible only on inner pages) -->
+        <nav class="navbar hidden" id="main-nav">
+            <div class="nav-item active" data-target="home">
+                <i class="fa-solid fa-house nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </div>
+            <div class="nav-item" data-target="history">
+                <i class="fa-solid fa-clock-rotate-left nav-icon"></i>
+                <span class="nav-label">History</span>
+            </div>
+            <div class="nav-item" data-target="settings">
+                <i class="fa-solid fa-sliders nav-icon"></i>
+                <span class="nav-label">Settings</span>
+            </div>
+        </nav>
+
+    </div>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>

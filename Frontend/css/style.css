@@ -1,0 +1,344 @@
+:root {
+    /* Color Palette - Botanical Theme */
+    --primary-green: #4CAF50;
+    --light-green: #E8F5E9;
+    --dark-green: #2E7D32;
+    --accent-leaf: #81C784;
+    --bg-color: #F9FCF9;
+    /* Very light subtle green/white */
+    --card-bg: rgba(255, 255, 255, 0.85);
+    /* Translucent */
+    --text-color: #2c3e50;
+    --text-muted: #7f8c8d;
+    --danger-red: #e74c3c;
+    --border-radius: 20px;
+    --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --font-main: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* Animation */
+    --transition-speed: 0.3s;
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --card-bg: rgba(40, 40, 40, 0.9);
+    --text-color: #ecf0f1;
+    --text-muted: #bdc3c7;
+    --light-green: #2c3e50;
+    /* Darker accent for dark mode */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(at 10% 10%, rgba(76, 175, 80, 0.1) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(129, 199, 132, 0.1) 0px, transparent 50%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+#app {
+    width: 100%;
+    max-width: 480px;
+    /* Mobile app feel forced everywhere */
+    height: 100vh;
+    /* Full screen on mobile */
+    max-height: 900px;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Common View Styles */
+.view {
+    flex: 1;
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    padding: 24px;
+    overflow-y: auto;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.view.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    border: none;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary {
+    background: var(--primary-green);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    background: white;
+}
+
+.error-msg {
+    color: var(--danger-red);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+/* Navbar */
+.navbar {
+    height: 70px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-item.active {
+    color: var(--primary-green);
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+}
+
+/* Specific Page Styles */
+.logo-container {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-green);
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+}
+
+/* Password Strength */
+.password-requirements {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.req-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+}
+
+.req-item.valid {
+    color: var(--primary-green);
+}
+
+.req-item i {
+    font-size: 0.7rem;
+}
+
+/* Home Page */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.camera-card {
+    background: var(--primary-green);
+    color: white;
+    border-radius: 30px;
+    padding: 40px 20px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 15px 30px rgba(76, 175, 80, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.camera-card:active {
+    transform: scale(0.98);
+}
+
+.camera-lens {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.camera-inner {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Settings */
+.settings-section {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.setting-row:last-child {
+    margin-bottom: 0;
+}
+
+.toggle-switch {
+    /* Simple CSS toggle */
+    cursor: pointer;
+}
+
+/* Password Toggle Styling */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    /* Space for the icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-green);
+}
