@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 const multer = require("multer");
 const { spawn } = require("child_process");
-
+require("dotenv").config();
 const app = express();
 const PORT = 5000;
 
@@ -22,8 +22,8 @@ const verificationCodes = {};
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "luma.app1111@gmail.com",
-    pass: "ugsi xika mwtw odnf" // Gmail App Password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS // Gmail App Password
   }
 });
 
