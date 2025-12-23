@@ -169,7 +169,10 @@ const app = {
 
                 const email = document.getElementById("reg-email").value;
                 const pass = document.getElementById("reg-password").value;
-                const username = email.split("@")[0];
+                const username = document
+               .getElementById("reg-username")
+               .value
+               .trim();
 
                 // Validate before submitting
                 if (!app.auth.validatePassword(pass)) {
@@ -378,19 +381,21 @@ const app = {
         },
 
         updateSettings: () => {
-            if (app.state.currentUser) {
-                const username = app.state.userData?.username || "User";
-                document.getElementById('settings-username').textContent = username;
-                document.getElementById('settings-email').textContent = app.state.currentUser.email;
-            }
+            if (!app.state.currentUser || !app.state.userData) return;
+
+    document.getElementById('settings-username').textContent =
+        app.state.userData.username;
+
+    document.getElementById('settings-email').textContent =
+        app.state.currentUser.email;
+
         },
 
         updateHome() {
-            if (app.state.currentUser) {
-                // Use username from Firestore if available, else email prefix
-                const name = app.state.userData?.username || app.state.currentUser.email.split("@")[0];
-                document.getElementById("home-username").textContent = name;
-            }
+           if (!app.state.currentUser || !app.state.userData) return;
+
+    document.getElementById("home-username").textContent =
+        app.state.userData.username;
         },
 
         renderHistory() {
