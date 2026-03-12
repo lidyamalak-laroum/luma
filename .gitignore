@@ -1,15 +1,20 @@
 # Node
 node_modules/
+npm-debug.log*
 
-# Env
+# Environment variables
 .env
 
-# Python
-__pycache__/
-*.pyc
+# ML model weights (large file — download separately)
+backend/ml/plants9615_checkpoint.pth
+
+# Uploaded images (temp folder)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
 
 # VS Code
 .vscode/
-
-# Uploads (optional)
-uploads/
