@@ -15,7 +15,7 @@ app.use(express.json());
 // ── Serve Frontend static files ─────────────────────────────
 // This allows the app to be opened via http://localhost:5000
 // which is required for ES module imports to work correctly.
-app.use(express.static(path.join(__dirname, "../../Frontend")));
+app.use(express.static(path.join(__dirname, "../../frontend")));
 
 // ── API Routes ──────────────────────────────────────────────
 app.use("/api/auth", authRoutes);   // /api/auth/send-code, /api/auth/verify-code
@@ -24,7 +24,7 @@ app.use("/api/scan", scanRoutes);   // /api/scan
 // ── Catch-all: serve index.html for SPA routing ─────────────
 app.get("*", (req, res) => {
     if (!req.path.startsWith("/api")) {
-        res.sendFile(path.join(__dirname, "../../Frontend/index.html"));
+        res.sendFile(path.join(__dirname, "../../frontend/index.html"));
     }
 });
 
