@@ -1,5 +1,5 @@
 // Base URL for all backend API calls
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "luma-production-fb3e.up.railway.app";
 
 /**
  * Send verification code to user's email
