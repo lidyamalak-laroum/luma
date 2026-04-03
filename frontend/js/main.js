@@ -28,18 +28,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // ── Auth state listener ───────────────────────────────────────────────────
     onAuthChange(async (user) => {
         if (user) {
+            const DEMO_EMAIL = "luma.demo.user@gmail.com";
+            const isDemo = user.email === DEMO_EMAIL;
+
             const snap = await getUserDoc(user.uid);
 
             // Guard: Firestore doc may not exist yet
-            if (!snap.exists()) {
+            if (!snap.exists() && !isDemo) {
                 await logout();
                 navigate("login");
                 return;
             }
 
-            const data = snap.data();
+            const data = snap.exists() ? snap.data() : {};
 
-            if (!data?.verified) {
+            // Bypass verification for the demo account
+            if (!isDemo && !data?.verified) {
                 if (justRegistered) {
                     // User just signed up in this session — show verify view.
                     setJustRegistered(false);
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Derive a display name: prefer Firestore username, fall back to email prefix
-            const displayName = data.username || user.email.split("@")[0];
+            const displayName = isDemo ? "Demo User" : (data.username || user.email.split("@")[0]);
             const email = user.email;
 
             navigate("home");

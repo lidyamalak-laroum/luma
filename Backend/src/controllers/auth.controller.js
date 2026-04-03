@@ -24,11 +24,11 @@ exports.sendCode = async (req, res) => {
         };
 
         await transporter.sendMail(mailOptions);
-        console.log(`✅ Code sent to ${email} (uid=${uid}): ${code}`);
+        console.log(`Code sent to ${email} (uid=${uid}): ${code}`);
 
         return res.json({ success: true, message: "Code sent successfully" });
     } catch (error) {
-        console.error("❌ /api/send-code error:", error);
+        console.error(" /api/send-code error:", error);
         return res.status(500).json({ success: false, message: "Failed to send email" });
     }
 };
