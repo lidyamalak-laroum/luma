@@ -97,3 +97,20 @@ export async function getUserScans(uid) {
     const snapshot = await getDocs(q);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
+
+/**
+ * Fetches the 3 most recent scan records for the Home "Recent Advice" section.
+ * @param {string} uid
+ * @returns {Promise<Array<{id, diagnosis, advice, timestamp}>>}
+ */
+export async function getRecentScans(uid) {
+    const q = query(
+        collection(db, "scan_history"),
+        where("userId", "==", uid),
+        orderBy("timestamp", "desc"),
+        limit(3)
+    );
+
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}

@@ -8,7 +8,7 @@ import { justRegistered, setJustRegistered } from "./appState.js";
 import { initLoginView } from "./views/login.js";
 import { initRegisterView } from "./views/register.js";
 import { initVerifyView } from "./views/verify.js";
-import { initHomeView, updateHomeGreeting } from "./views/home.js";
+import { initHomeView, updateHomeGreeting, renderRecentAdvice } from "./views/home.js";
 import { initHistoryView, renderHistory } from "./views/history.js";
 import { initSettingsView, updateSettingsProfile } from "./views/settings.js";
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = user.email;
 
             navigate("home");
-            await renderHistory();
+            await Promise.all([renderHistory(), renderRecentAdvice()]);
             updateHomeGreeting(displayName);
             updateSettingsProfile(displayName, email);
         } else {
