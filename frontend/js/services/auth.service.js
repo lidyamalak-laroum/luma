@@ -2,6 +2,7 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signInAnonymously,
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
@@ -38,6 +39,14 @@ export async function login(email, password) {
  */
 export async function logout() {
     return signOut(auth);
+}
+
+/**
+ * Sign in anonymously (for demo/guest users).
+ * Each device gets a unique anonymous UID with isolated data.
+ */
+export async function loginAnonymous() {
+    return signInAnonymously(auth);
 }
 
 /**

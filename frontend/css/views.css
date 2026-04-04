@@ -83,6 +83,7 @@
     border: none;
     box-shadow: none;
     border-radius: 0;
+    mix-blend-mode: multiply;
 }
 
 .logo-img-small {
@@ -93,6 +94,7 @@
     border: none;
     box-shadow: none;
     border-radius: 0;
+    mix-blend-mode: multiply;
 }
 
 /* ── Demo login ──────────────────────────────────────────────── */

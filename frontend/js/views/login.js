@@ -1,4 +1,4 @@
-import { login } from "../services/auth.service.js";
+import { login, loginAnonymous } from "../services/auth.service.js";
 import { navigate } from "../router.js";
 
 export function initLoginView() {
@@ -15,14 +15,14 @@ export function initLoginView() {
         }
     });
 
-    // ── Demo login ────────────────────────────────────────────
+    // ── Guest (anonymous) login ───────────────────────────────
     document.getElementById("btn-demo-login")
         ?.addEventListener("click", async () => {
             const btn = document.getElementById("btn-demo-login");
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Logging in…';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Signing in…';
             try {
-                await login("luma.demo.user@gmail.com", "luma123456");
+                await loginAnonymous();
                 // onAuthStateChanged in main.js handles redirect
             } catch (err) {
                 alert(err.message);

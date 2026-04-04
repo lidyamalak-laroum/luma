@@ -28,22 +28,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // ── Auth state listener ───────────────────────────────────────────────────
     onAuthChange(async (user) => {
         if (user) {
-            const DEMO_EMAIL = "luma.demo.user@gmail.com";
-            const isDemo = user.email === DEMO_EMAIL;
+            const isAnonymous = user.isAnonymous;
 
+            if (isAnonymous) {
+                // Anonymous/guest user — no Firestore doc or verification needed
+                navigate("home");
+                await Promise.all([renderHistory(), renderRecentAdvice()]);
+                updateHomeGreeting("Guest User");
+                updateSettingsProfile("Guest User", "Anonymous session");
+                return;
+            }
+
+            // Regular email/password user
             const snap = await getUserDoc(user.uid);
 
             // Guard: Firestore doc may not exist yet
-            if (!snap.exists() && !isDemo) {
+            if (!snap.exists()) {
                 await logout();
                 navigate("login");
                 return;
             }
 
-            const data = snap.exists() ? snap.data() : {};
+            const data = snap.data();
 
-            // Bypass verification for the demo account
-            if (!isDemo && !data?.verified) {
+            if (!data?.verified) {
                 if (justRegistered) {
                     // User just signed up in this session — show verify view.
                     setJustRegistered(false);
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Derive a display name: prefer Firestore username, fall back to email prefix
-            const displayName = isDemo ? "Demo User" : (data.username || user.email.split("@")[0]);
+            const displayName = data.username || user.email.split("@")[0];
             const email = user.email;
 
             navigate("home");
