@@ -74,7 +74,6 @@ luma/
 
 ```bash
 cd Backend
-cp .env.example .env   # Fill in your credentials
 npm install
 npm start
 ```
