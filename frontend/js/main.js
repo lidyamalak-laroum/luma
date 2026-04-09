@@ -14,6 +14,15 @@ import { initSettingsView, updateSettingsProfile } from "./views/settings.js";
 
 // ── Bootstrap ────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
+    // ── Theme: force light mode by default for new visitors ───────────────────
+    const savedTheme = localStorage.getItem("luma_theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    } else {
+        // First visit or explicit "light" — always start in light mode
+        document.body.classList.remove("dark-mode");
+    }
+
     // Init router (nav-item click listeners)
     initRouter();
 
