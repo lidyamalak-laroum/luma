@@ -127,7 +127,7 @@ Uses [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://h
 | Layer | Platform |
 |---|---|
 | Frontend | [Vercel](https://vercel.com) |
-| Backend | [Railway](https://railway.app) |
+| Backend | [Render](https://render.com) |
 
 ---
 
