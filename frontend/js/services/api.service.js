@@ -1,5 +1,5 @@
 // Base URL for all backend API calls
-const BASE_URL = "https://luma-production-fb3e.up.railway.app/api";
+const BASE_URL = "https://luma-backend-mqjz.onrender.com/api";
 
 /**
  * Send verification code to user's email
